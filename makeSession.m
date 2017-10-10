@@ -1,28 +1,5 @@
 function varargout = makeSession(varargin)
-% MAKESESSION MATLAB code for makeSession.fig
-%      MAKESESSION, by itself, creates a new MAKESESSION or raises the existing
-%      singleton*.
-%
-%      H = MAKESESSION returns the handle to a new MAKESESSION or the handle to
-%      the existing singleton*.
-%
-%      MAKESESSION('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in MAKESESSION.M with the given input arguments.
-%
-%      MAKESESSION('Property','Value',...) creates a new MAKESESSION or raises the
-%      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before makeSession_OpeningFcn gets called.  An
-%      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to makeSession_OpeningFcn via varargin.
-%
-%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
-%      instance to run (singleton)".
-%
-% See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help makeSession
-
-% Last Modified by GUIDE v2.5 10-Oct-2017 13:28:21
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -41,46 +18,18 @@ if nargout
 else
     gui_mainfcn(gui_State, varargin{:});
 end
-% End initialization code - DO NOT EDIT
-
-
-% --- Executes just before makeSession is made visible.
 function makeSession_OpeningFcn(hObject, eventdata, handles, varargin)
-% This function has no output args, see OutputFcn.
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to makeSession (see VARARGIN)
 
-% Choose default command line output for makeSession
 handles.output = hObject;
 
-% Update handles structure
 guidata(hObject, handles);
-
-% UIWAIT makes makeSession wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
-
-
-% --- Outputs from this function are returned to the command line.
 function varargout = makeSession_OutputFcn(hObject, eventdata, handles) 
-% varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Get default command line output from handles structure
 varargout{1} = handles.output;
 
 
 
 function sampleRateEntry_Callback(hObject, eventdata, handles)
-% hObject    handle to sampleRateEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of sampleRateEntry as text
-%        str2double(get(hObject,'String')) returns contents of sampleRateEntry as a double
 sR=str2double(get(handles.sampleRateEntry,'String'));
 g=evalin('base','exist(''simpSession'');');
 if g
@@ -88,125 +37,92 @@ if g
 else
 end
 
-% --- Executes during object creation, after setting all properties.
 function sampleRateEntry_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to sampleRateEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
 
 function trialLengthEntry_Callback(hObject, eventdata, handles)
-% hObject    handle to trialLengthEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of trialLengthEntry as text
-%        str2double(get(hObject,'String')) returns contents of trialLengthEntry as a double
-
-
-% --- Executes during object creation, after setting all properties.
 function trialLengthEntry_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to trialLengthEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
 
 function trialCountEntry_Callback(hObject, eventdata, handles)
-% hObject    handle to trialCountEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of trialCountEntry as text
-%        str2double(get(hObject,'String')) returns contents of trialCountEntry as a double
-
-
-% --- Executes during object creation, after setting all properties.
 function trialCountEntry_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to trialCountEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
 
 function boardEntry_Callback(hObject, eventdata, handles)
-% hObject    handle to boardEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of boardEntry as text
-%        str2double(get(hObject,'String')) returns contents of boardEntry as a double
+function [outString,outputCount]=refreshOuts(hObject,eventdata,handles)
+    channelCount=evalin('base','numel(simpSession.Channels)');
+    cIt=0;
+    outString={};
 
-
-% --- Executes during object creation, after setting all properties.
-function boardEntry_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to boardEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function channelEntry_Callback(hObject, eventdata, handles)
-% hObject    handle to channelEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of channelEntry as text
-%        str2double(get(hObject,'String')) returns contents of channelEntry as a double
-
-boardToUse=get(handles.boardEntry,'String');
-ogChString=get(handles.channelEntry,'String');
-spltChan=strsplit(ogChString,',');
-
-for n=1:numel(spltChan)
-    curSt=spltChan{n};
-    if strcmp(curSt(1:2),'ao')
-        evalin('base',['simpSession.addAnalogOutputChannel(' '''' boardToUse '''' ',' '''' spltChan{n} '''' ',' '''Voltage'');'])
-    elseif strcmp(curSt(1:2),'ai')
-        evalin('base',['simpSession.addAnalogInputChannel(' '''' boardToUse '''' ',' '''' spltChan{n} '''' ',' '''Voltage'');'])
-    else
-        disp('name your channels as ai or ao; no digitals for now')
+    for n=1:channelCount
+        tS=evalin('base',['simpSession.Channels(1,' num2str(n) ').ID']);
+        if strmatch('ao',tS)
+            cIt=cIt+1;
+            outString{cIt}=tS;
+            clear tS
+        else
+        end
     end
-end
+    
+    assignin('base','debugS',outString)
+    if numel(outString)>0
+        set(handles.outputChannelMenu,'String',outString);
+    else
+        set(handles.outputChannelMenu,'String',{'dA1','dA2'});
+    end
+    outputCount=numel(outString);
 
-set(handles.outputChannelMenu,'String',strsimpSession.Channels.ID)
+    
+function channelEntry_Callback(hObject, eventdata, handles)
 
-% --- Executes during object creation, after setting all properties.
+    boardToUse=get(handles.boardEntry,'String');
+    ogChString=get(handles.channelEntry,'String');
+    spltChan=strsplit(ogChString,',');
+    
+    
+    channelCount=evalin('base','numel(simpSession.Channels)');
+    tS={};
+    for n=1:channelCount
+        tS{n}=evalin('base',['simpSession.Channels(1,' num2str(n) ').ID']);
+    end
+    
+    
+    for n=1:numel(spltChan)
+        disp(tS)
+        disp('lkl')
+        curSt=spltChan{n};
+        strcmp(curSt,tS)
+        if numel(find(strcmp(curSt,tS)==1))==0
+            if strcmp(curSt(1:2),'ao')
+                evalin('base',['simpSession.addAnalogOutputChannel(' '''' boardToUse '''' ',' '''' spltChan{n} '''' ',' '''Voltage'');'])
+            elseif strcmp(curSt(1:2),'ai')
+                evalin('base',['simpSession.addAnalogInputChannel(' '''' boardToUse '''' ',' '''' spltChan{n} '''' ',' '''Voltage'');'])
+            else
+                disp('name your channels as ai or ao; no digitals for now')
+            end
+        else
+        end
+    end
+    refreshOuts(hObject,eventdata,handles)
+
+
 function channelEntry_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to channelEntry (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
 
 
 % --- Executes on button press in startSessionBtn.
@@ -248,6 +164,7 @@ end
 
 
 function waveformTypeMenu_Callback(hObject, eventdata, handles)
+    
 
 
 function waveformTypeMenu_CreateFcn(hObject, eventdata, handles)
@@ -319,11 +236,51 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-function pushbutton3_Callback(hObject, eventdata, handles)
+function generateWaveBtn_Callback(hObject, eventdata, handles)
+    sRate=str2double(get(handles.sampleRateEntry,'String'));
+    
+    [~,oCnt]=refreshOuts(hObject,eventdata,handles)
+    
+    
+    
+    tTrialTime=str2double(get(handles.trialLengthEntry,'String'));
+    tSamps=sRate*(tTrialTime);
+    totTrials=str2double(get(handles.trialCountEntry,'String'));
+    
+    g=evalin('base','exist(''dataTrain'')');
+    if g==0
+        if oCnt==0
+            oCnt=2; %debug
+        else
+        end
+        tDM=zeros(tSamps,oCnt,totTrials);
+        assignin('base','dataTrain',tDM);
+        clear tDM
+    else
+    end
+    
+    
+    selChanNum=get(handles.outputChannelMenu,'Value');
+    tAmp=str2double(get(handles.pulseAmplitudeEntry,'String'));
+    tPWdth=str2double(get(handles.pulseWidthEntry,'String'));
+    tNumPls=str2double(get(handles.pulseCountEntry,'String'));
+    tFrq=str2double(get(handles.pulseFrequencyEntry,'String'));
+    tBlTime=str2double(get(handles.baselineEntry,'String'));
+    tBlValue=0;
+    
+    
+    trialsToMap=get(handles.trialSpanEntry,'String');
+    assignin('base','debug2',{tAmp,tPWdth,tNumPls,tFrq,tBlTime,tBlValue,...
+        1,1,sRate,tTrialTime});
+    tWv=pulser_pulses(tAmp,tPWdth,tNumPls,tFrq,tBlTime,tBlValue,...
+        1,1,sRate,tTrialTime);
+    assignin('base','tWv',tWv);
+    evalin('base',['dataTrain(:,' num2str(selChanNum) ',' trialsToMap ')=tWv;'])
 
 
 function outputChannelMenu_Callback(hObject, eventdata, handles)
 
+    refreshOuts(hObject,eventdata,handles)
 
 function outputChannelMenu_CreateFcn(hObject, eventdata, handles)
 
@@ -341,6 +298,52 @@ function trialSpanEntry_Callback(hObject, eventdata, handles)
 
 
 function trialSpanEntry_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+function boardEntry_CreateFcn(hObject, eventdata, handles)
+
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+
+
+
+function clearSessionBtn_Callback(hObject, eventdata, handles)
+
+
+function baselineEntry_Callback(hObject, eventdata, handles)
+
+
+function baselineEntry_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function pulseCountEntry_Callback(hObject, eventdata, handles)
+
+
+function pulseCountEntry_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function pulseWidthEntry_Callback(hObject, eventdata, handles)
+
+
+function pulseWidthEntry_CreateFcn(hObject, eventdata, handles)
 
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
