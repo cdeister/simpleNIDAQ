@@ -22,7 +22,7 @@ function varargout = makeSession(varargin)
 
 % Edit the above text to modify the response to help makeSession
 
-% Last Modified by GUIDE v2.5 07-Oct-2017 16:31:49
+% Last Modified by GUIDE v2.5 10-Oct-2017 13:28:21
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -194,6 +194,8 @@ for n=1:numel(spltChan)
     end
 end
 
+set(handles.outputChannelMenu,'String',strsimpSession.Channels.ID)
+
 % --- Executes during object creation, after setting all properties.
 function channelEntry_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to channelEntry (see GCBO)
@@ -237,6 +239,108 @@ function pulseFrequencyEntry_Callback(hObject, eventdata, handles)
 
 
 function pulseFrequencyEntry_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function waveformTypeMenu_Callback(hObject, eventdata, handles)
+
+
+function waveformTypeMenu_CreateFcn(hObject, eventdata, handles)
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function edit10_Callback(hObject, eventdata, handles)
+
+
+function edit10_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function edit11_Callback(hObject, eventdata, handles)
+
+
+function edit11_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function edit12_Callback(hObject, eventdata, handles)
+
+
+function edit12_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function edit13_Callback(hObject, eventdata, handles)
+
+
+function edit13_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function edit14_Callback(hObject, eventdata, handles)
+
+
+function edit14_CreateFcn(hObject, eventdata, handles)
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function pushbutton3_Callback(hObject, eventdata, handles)
+
+
+function outputChannelMenu_Callback(hObject, eventdata, handles)
+
+
+function outputChannelMenu_CreateFcn(hObject, eventdata, handles)
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function pushbutton4_Callback(hObject, eventdata, handles)
+
+
+function trialSpanEntry_Callback(hObject, eventdata, handles)
+
+
+function trialSpanEntry_CreateFcn(hObject, eventdata, handles)
 
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
