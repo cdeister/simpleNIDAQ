@@ -21,15 +21,16 @@ int delayTime=500;
 float writeValA=0;
 float writeValB=0;
 int trTime=10;
-float trLen=sampsPerSecond*trTime;
+float trLen[]={12000,20000};
 int trCount=1;
+float aVal=0;
+float bVal=0;
 
 
 
-float sVa[] = {2,5}; 
-float sVb[] = {0,0};
-float aSc=map(sVa[trCount-1], 0, 5, 0, 4095);
-float bSc=map(sVb[trCount-1], 0, 5, 0, 4095); 
+float aSc[] = {2000,4095}; 
+float bSc[] = {0,0};
+
 
 const int dacPinA=A21;
 const int dacPinB=A22;
@@ -57,16 +58,16 @@ void fStim()
   stimType=0;
   pCounter=pCounter+1;
   tCounter=tCounter+1;
+  aVal=aSc[trCount-1];
+  bVal=bSc[trCount-1];
 
-  if (pCounter>trLen && trCount<=2){
+  if (pCounter>trLen[trCount-1] && trCount<=2){
     trCount=trCount+1;
     pCounter=1;
     tCounter=1;
-    aSc=map(sVa[trCount-1], 0, 5, 0, 4095);
-    bSc=map(sVb[trCount-1], 0, 5, 0, 4095);
   }
   
-  if (pCounter>trLen && trCount>2){
+  if (trCount>2){
     stimType=2;
   }
 
@@ -81,8 +82,8 @@ void fStim()
     }
     else if (tCounter>pulseTime && tCounter<=pulseTime+delayTime){
       oVal=1;
-      writeValA=aSc;
-      writeValB=bSc;
+      writeValA=aVal;
+      writeValB=bVal;
       digitalWrite(led_pin, oVal);  
     }
     else if (tCounter>=pulseTime+delayTime+1){ 
@@ -92,6 +93,12 @@ void fStim()
       digitalWrite(led_pin, oVal);
       tCounter=1;    
     }
+    Serial.print(writeValA);
+    Serial.print(',');
+    Serial.print(writeValB);
+    Serial.print(',');
+    Serial.println(pCounter);
+    
     
   }
   else if (stimType==2){
@@ -101,15 +108,14 @@ void fStim()
       analogWrite(dacPinA, writeValA);
       analogWrite(dacPinB, writeValB);
       digitalWrite(led_pin, oVal);
-      pCounter=trLen+1;
-      tCounter=0;   
+      pCounter=1;
+      tCounter=1;   
   }
+
   
 //  Serial.print(tCounter);
 //  Serial.print(',');
-  Serial.print(writeValA);
-  Serial.print(',');
-  Serial.println(writeValB);
+  
 }
 
 void loop()
